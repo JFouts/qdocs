@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { QuestionComponent } from './question/question.component'
+import { QuestionPageComponent, QuestionComponent, QuestionResponseComponent } from './question';
+import { UserTagComponent } from './user';
+import { VoterComponent } from './voter';
 
 @NgModule({
   imports: [
@@ -9,7 +11,11 @@ import { QuestionComponent } from './question/question.component'
   ],
   declarations: [
     AppComponent, 
-    QuestionComponent
+    QuestionPageComponent,
+    QuestionComponent,
+    UserTagComponent,
+    VoterComponent,
+    QuestionResponseComponent
   ],
   bootstrap: [ AppComponent ]
 })

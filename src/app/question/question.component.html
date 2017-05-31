@@ -1,3 +1,11 @@
-<div>
-    Question
+<div class="question-container">
+    <voter [voteCount]="question.votes"
+           (upvote)="onUpVote()"
+           (downvote)="onDownVote()">
+    </voter>
+    <div class="content-block">
+        <div class="question-title">{{question.title}}</div>
+        <div class="content">{{question.content}}</div>
+        <user-tag [user]="question.user"></user-tag>
+    </div>
 </div>

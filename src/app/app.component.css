@@ -1,3 +1,27 @@
 main {
   font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.main-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  height: 48px;
+  background: #007daa;
+}
+
+.menu-item { 
+  margin-top: 10px;
+  margin-right: 8px;
+  margin-left: 16px;
+}
+
+.menu-item a {
+  color: #fff;
+  text-shadow: 1px 1px #000;
+  font-size: 1.3em;
 }

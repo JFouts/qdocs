@@ -1,0 +1,23 @@
+.question-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
+    margin-bottom: 18px;
+}
+
+.response-button {
+    margin-top: 8px;
+    align-self: flex-end;
+}
+
+.response-box {
+    margin-left: 62px;
+    margin-right: 12px;
+    padding: 12px;
+    box-shadow: 1px 1px 4px #888;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}

@@ -1,0 +1,9 @@
+<div class="comment-container">
+    <voter [voteCount]="response.votes"
+           (upvote)="onUpVote()"
+           (downvote)="onDownVote()"></voter>
+    <div class="content-block">
+        <div class="content">{{response.content}}</div>
+        <user-tag [user]="response.user"></user-tag>
+    </div>
+</div>

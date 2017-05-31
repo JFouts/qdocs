@@ -1,0 +1,24 @@
+.user-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #999;
+}
+
+img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid #999;
+}
+
+.user-detail {
+    margin-right: 6px;
+}
+
+.user-name {
+    font-size: 1em;
+}
+.user-description {
+    font-size: .8em;
+}

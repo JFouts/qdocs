@@ -1,0 +1,13 @@
+<div class="question-page-container">
+    <question [question]="question"></question>
+    <question-response 
+        *ngFor="let response of question.responses" 
+        [response]="response">
+    </question-response>
+    <div class="response-box">
+        <div>
+            <textarea id="edit-field"></textarea>
+        </div>
+        <button class="response-button" (click)="onAddResponse()">Add Response</button>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-.question-container {
+.comment-container {
     display: flex;
     align-items: flex-start;
     margin: 12px;
@@ -8,9 +8,4 @@
     margin-left: 12px;
     padding: 12px;
     box-shadow: 1px 1px 4px #888;
-}
-
-.question-title {
-    font-size: 1.4em;
-    margin-bottom: 8px;
 }
