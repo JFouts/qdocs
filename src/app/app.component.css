@@ -9,19 +9,26 @@ main {
 }
 
 .header {
+  padding-left: 12px;
   display: flex;
   height: 48px;
   background: #007daa;
 }
 
 .menu-item { 
-  margin-top: 10px;
+  margin-top: 12px;
   margin-right: 8px;
   margin-left: 16px;
+}
+
+.header img {
+  height: 42px;
+  width: 42px;
 }
 
 .menu-item a {
   color: #fff;
   text-shadow: 1px 1px #000;
   font-size: 1.3em;
+  text-decoration: none;
 }

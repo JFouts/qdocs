@@ -31,6 +31,26 @@ export class QuestionService {
         return question;
     }
 
+    getQuestions(): Question[] {
+        var questions = [];
+        var question = new Question();
+        question.id = "0";
+        question.title = "How do I do this this thing that I want to know about?";
+        question.responses = [];
+
+        questions[0] = question;
+        questions[1] = question;
+        questions[2] = question;
+        questions[3] = question;
+        questions[4] = question;
+
+        return questions;
+    }
+
+    addQuestion(question: Question): Question {
+        return question;
+    }
+
     setQuestionVote(question: Question, voteType: VoteType) : Question {
         if(voteType === VoteType.Upvote)
             question.votes++;

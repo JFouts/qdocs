@@ -1,16 +1,14 @@
 <main>
   <div class="header">
+    <img src="../assets/images/boxicon.png">
     <div class="menu-item">
-      <a href="/">Home</a>
+      <a routerLink="/">Home</a>
     </div>
     <div class="menu-item">
-      <a href="/questions">Questions</a>
-    </div>
-    <div class="menu-item">
-      <a href="/about">About</a>
+      <a routerLink="/questions">Questions</a>
     </div>
   </div>
   <div class="main-content">
-    <question-page></question-page>
+    <router-outlet></router-outlet>
   </div>
 </main>

@@ -1,0 +1,21 @@
+<div class="question-list-page">
+    <h1>Questions</h1>
+    <div class="toolbar">
+        <div class="search-box">
+            <input class="search-input" type="search" placeholder="Search">
+            <button class="search-button">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+    <ul>
+        <li *ngFor="let question of questions">
+            <a routerLink="/questions/{{question.id}}">
+                <div class="title">{{question.title}}</div>
+                <div>{{question.responses.length}} Replies</div>
+            </a>
+        </li>
+    </ul>
+    
+    <button class="question-button" (click)="onAskButtonClick()">Ask Question</button>
+<div>

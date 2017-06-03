@@ -22,7 +22,7 @@ export class QuestionPageComponent implements OnInit {
     {
         // TODO: get id from route
         this.question = this.questionService.getQuestion("");
-
+        
         this.simpledme = new SimpleMDE({ 
             element: document.getElementById("edit-field"),
             status: false
