@@ -16,10 +16,12 @@ export class QuestionComponent {
         private questionService : QuestionService) { }
 
     onUpVote() {
-        this.question = this.questionService.setQuestionVote(this.question, VoteType.Upvote);
+        this.questionService.setQuestionVote(this.question, VoteType.Upvote)
+            .subscribe((question: Question) => this.question = question);
     }
 
     onDownVote() {
-        this.question = this.questionService.setQuestionVote(this.question, VoteType.Downvote);
+        this.questionService.setQuestionVote(this.question, VoteType.Downvote)
+            .subscribe((question: Question) => this.question = question);
     }
 }

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params }   from '@angular/router';
 import { Question } from './question.model';
 import { QuestionService } from './question.service';
 import { QuestionResponse } from './question-response.model';
 import { User } from '../user';
+import 'rxjs/add/operator/switchMap';
 import * as SimpleMDE from 'simplemde';
 
 @Component({
@@ -16,13 +18,17 @@ export class QuestionPageComponent implements OnInit {
     private simpledme: SimpleMDE; 
 
     constructor(
-        private questionService: QuestionService) { }
+        private questionService: QuestionService,
+        private route: ActivatedRoute) { }
 
     ngOnInit()
     {
-        // TODO: get id from route
-        this.question = this.questionService.getQuestion("");
-        
+        this.route.params
+            .switchMap((params: Params) => 
+                this.questionService.getQuestion(params['id']))
+            .subscribe((question: Question) => 
+                this.question = question);
+
         this.simpledme = new SimpleMDE({ 
             element: document.getElementById("edit-field"),
             status: false
@@ -35,6 +41,7 @@ export class QuestionPageComponent implements OnInit {
         response.votes = 0;
         response.content = this.simpledme.value();
         this.simpledme.value("");
-        this.question = this.questionService.addResponse(this.question, response);
+        this.questionService.addResponse(this.question, response)
+            .subscribe((question: Question) => this.question = question);
     }
 }

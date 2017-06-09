@@ -11,8 +11,7 @@ import * as SimpleMDE from 'simplemde';
 })
 export class QuestionAskPageComponent implements OnInit {
 
-    private simpledme: SimpleMDE; 
-    title: string;
+    private simpledme: SimpleMDE;
     
     constructor(
         private questionService: QuestionService,
@@ -26,13 +25,15 @@ export class QuestionAskPageComponent implements OnInit {
         });
     }
 
-    onAddQuestion() {
+    onAddQuestion(title: string) {
         var question = new Question();
 
-        question.title = this.title;
+        question.title = title;
         question.content = this.simpledme.value();
 
-        var newQuestion = this.questionService.addQuestion(question);
-        this.router.navigate(['/questions/' + newQuestion.id]);
+        this.questionService.addQuestion(question)
+            .subscribe((question: Question) => {
+                this.router.navigate(['/questions/' + question.id]);
+            });
     }
 }

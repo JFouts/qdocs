@@ -17,7 +17,8 @@ export class QuestionListPageComponent implements OnInit {
         private router: Router) { }
 
     ngOnInit() {
-        this.questions = this.questionService.getQuestions();
+        this.questionService.getQuestions()
+            .subscribe((questions: Question[]) => this.questions = questions);
     }
 
     onAskButtonClick() {

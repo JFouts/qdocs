@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Question } from './question.model';
 import { QuestionResponse } from './question-response.model';
 import { QuestionService } from './question.service';
 import { VoteType } from './vote-type.model';
@@ -10,16 +11,20 @@ import { VoteType } from './vote-type.model';
 })
 export class QuestionResponseComponent {
     @Input()
+    question: Question;
+    @Input()
     response: QuestionResponse;
 
     constructor(
         private questionService : QuestionService) { }
 
     onUpVote() {
-        this.response = this.questionService.setResponseVote(this.response, VoteType.Upvote);
+        this.questionService.setResponseVote(this.question, this.response, VoteType.Upvote)
+            .subscribe((response: QuestionResponse) => this.response = response);
     }
 
     onDownVote() {
-        this.response = this.questionService.setResponseVote(this.response, VoteType.Downvote);
+        this.questionService.setResponseVote(this.question, this.response, VoteType.Downvote)
+            .subscribe((response: QuestionResponse) => this.response = response);
     }
 }

@@ -1,4 +1,4 @@
-<div class="question-list-page">
+<div *ngIf="questions" class="question-list-page">
     <h1>Questions</h1>
     <div class="toolbar">
         <div class="search-box">
@@ -8,6 +8,11 @@
             </button>
         </div>
     </div>
+
+    <div *ngIf="questions.length === 0" class="message-box">
+        No questions have been asked yet. You could be the first!
+    </div>
+
     <ul>
         <li *ngFor="let question of questions">
             <a routerLink="/questions/{{question.id}}">

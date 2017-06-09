@@ -1,9 +1,16 @@
+
 <div class="question-page-container">
-    <question [question]="question"></question>
-    <question-response 
-        *ngFor="let response of question.responses" 
-        [response]="response">
-    </question-response>
+    
+    <question *ngIf="question" [question]="question"></question>
+
+    <div *ngIf="question">
+        <question-response
+            *ngFor="let response of question.responses"
+            [question]="question"
+            [response]="response">
+        </question-response>
+    </div>
+
     <div class="response-box">
         <div>
             <textarea id="edit-field"></textarea>

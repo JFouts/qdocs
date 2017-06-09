@@ -1,77 +1,56 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Question } from './question.model';
 import { QuestionResponse } from './question-response.model';
 import { User } from '../user';
 import { VoteType } from './vote-type.model';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 @Injectable()
 export class QuestionService {
-    getQuestion(id: string): Question {
-        var question = new Question();
-        question.content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet ante eget leo sagittis consequat. Aliquam volutpat sed massa et sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla laoreet diam quis nisi dictum pulvinar. Duis ac semper dolor, sed pellentesque odio. Suspendisse ut pharetra orci, eu pharetra est. Donec porta augue enim, a faucibus diam ullamcorper et. Fusce a leo in ligula lacinia fermentum sed eu odio.';
-        question.title = 'Lorem ipsum dolor sit amet?'
-        question.user = new User();
-        question.votes = 8888;
-        question.responses = [];
-        var q = new QuestionResponse();
-        q.content = 'Fusce eu erat cursus nisl varius vehicula. Proin tincidunt quis nunc eget varius. Suspendisse tristique bibendum dolor ut lacinia. Class.';
-        q.user = new User();
-        q.votes = 123;
-        question.responses.push(q);
-        q = new QuestionResponse();
-        q.content = 'Fusce eu erat cursus nisl varius vehicula. Proin tincidunt quis nunc eget varius. Suspendisse tristique bibendum dolor ut lacinia. Class.';
-        q.user = new User();
-        q.votes = 8;
-        question.responses.push(q);
-        q = new QuestionResponse();
-        q.content = 'Fusce eu erat cursus nisl varius vehicula. Proin tincidunt quis nunc eget varius. Suspendisse tristique bibendum dolor ut lacinia. Class.';
-        q.user = new User();
-        q.votes = -345;
-        question.responses.push(q);
-        return question;
+
+    apiEndpoint: string = "http://localhost:62538/api/"
+    headers: Headers;
+
+    constructor(
+        private http: Http) { 
+        this.headers = new Headers();
+        this.headers.set("Content-Type", 'application/json');
     }
 
-    getQuestions(): Question[] {
-        var questions = [];
-        var question = new Question();
-        question.id = "0";
-        question.title = "How do I do this this thing that I want to know about?";
-        question.responses = [];
-
-        questions[0] = question;
-        questions[1] = question;
-        questions[2] = question;
-        questions[3] = question;
-        questions[4] = question;
-
-        return questions;
+    getQuestion(id: string) {
+        return this.http.get(this.apiEndpoint + "questions/" + id)
+            .map(response => response.json());
     }
 
-    addQuestion(question: Question): Question {
-        return question;
+    getQuestions() {
+        return this.http.get(this.apiEndpoint + "questions")
+            .map(response => response.json());
     }
 
-    setQuestionVote(question: Question, voteType: VoteType) : Question {
-        if(voteType === VoteType.Upvote)
-            question.votes++;
-        else
-            question.votes--;
+    addQuestion(question: Question) {
+        let headers = new Headers({ 'content-type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
 
-        return question;
+        return this.http.post(this.apiEndpoint + "questions", question, options).map(response => response.json());
     }
 
-    setResponseVote(response: QuestionResponse, voteType: VoteType): QuestionResponse {
-        if(voteType === VoteType.Upvote)
-            response.votes++;
-        else
-            response.votes--;
-        
-        return response;
+    setQuestionVote(question: Question, voteType: VoteType) {
+        var vote = voteType === VoteType.Upvote ? 1 : -1;
+        return this.http.post(this.apiEndpoint + "questions/" + question.id + "/votes", vote, {
+            headers: this.headers
+        }).map(response => response.json());
     }
 
-    addResponse(question: Question, response: QuestionResponse): Question {
-        question.responses.push(response);
+    setResponseVote(question: Question, response: QuestionResponse, voteType: VoteType) {
+        var vote = voteType === VoteType.Upvote ? 1 : -1;
+        return this.http.post(this.apiEndpoint + "questions/" + question.id + "/responses/" + response.id + "/votes", vote, {
+            headers: this.headers
+        }).map(response => response.json());
+    }
 
-        return question;
+    addResponse(question: Question, response: QuestionResponse) {
+        return this.http.post(this.apiEndpoint + "questions/" + question.id + "/responses", response, {
+            headers: this.headers
+        }).map(response => response.json());
     }
 }

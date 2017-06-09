@@ -74,3 +74,11 @@ li:hover {
     justify-content: flex-end;
     margin-bottom: 8px;
 }
+
+.message-box {
+    text-align: center;
+    padding: 6px;
+    background: #ffc;
+    border: 1px solid #dda;
+    border-radius: 5px;
+}

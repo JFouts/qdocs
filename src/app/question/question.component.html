@@ -6,6 +6,6 @@
     <div class="content-block">
         <div class="question-title">{{question.title}}</div>
         <div class="content">{{question.content}}</div>
-        <user-tag [user]="question.user"></user-tag>
+        <user-tag *ngIf="question.user" [user]="question.user"></user-tag>
     </div>
 </div>
